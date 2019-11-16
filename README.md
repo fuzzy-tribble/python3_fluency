@@ -6,7 +6,9 @@ These workbooks are written for programmers that need a quick refresh on Python3
 
 ## Run locally
 
-Clone the repo and run on your local jupyter server
+Clone the repo and run on your local Jupyter server
+
+Visit https://jupyter.org/install for instructions on how to setup your local server
 
 ## Run in the cloud
 
