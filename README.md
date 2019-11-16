@@ -1,3 +1,13 @@
-# Python3 Fluency
+# Python3 Fluency Workbooks
 
-These notebooks are a continuation of the supplemental materials for fastai students however they can be used as independent helpful python3 review material
+These workbooks are written for programmers that need a quick refresh on Python3 best practices and fundamentals.
+
+# Getting Started
+
+## Run locally
+
+Clone the repo and run on your local jupyter server
+
+## Run in the cloud
+
+Go to Jupyter's nbviewing tool here: https://nbviewer.jupyter.org/
