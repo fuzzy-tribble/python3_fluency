@@ -10,4 +10,6 @@ Clone the repo and run on your local jupyter server
 
 ## Run in the cloud
 
-Go to Jupyter's nbviewing tool here: https://nbviewer.jupyter.org/
+Use Jupyter's online nbviewing tool here: https://nbviewer.jupyter.org/
+* copy and paste my github url and click on the notebook of interest
+* to run the code yourself interactively (highly recomended for your learning sake) click execute in binder
