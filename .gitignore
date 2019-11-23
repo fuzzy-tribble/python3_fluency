@@ -5,5 +5,5 @@
 !.gitignore
 !*.ipynb
 !*.md
-
+!.flake8
 
