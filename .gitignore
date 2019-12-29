@@ -92,6 +92,8 @@ ENV/
 # Emacs
 *~
 
+# Node
+node_modules/
 
 # Temporary data files
 notebooks/temp.json
