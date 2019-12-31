@@ -26,7 +26,7 @@ You can either reference the workbook content online using the link below or run
 
 The workbooks are ordered and do build on each other however if you are comfortable with preceeding workbooks you can dive in wherever.
 
-### [0. Control Flow](notebooks/00.00-Control-Flow.ipynb)
+### [0. Control Flow](00.00-Control-Flow.ipynb)
 
 * Conditional statements (if, else, etc)
 * Loops
