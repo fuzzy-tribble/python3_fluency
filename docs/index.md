@@ -22,6 +22,45 @@ You can either reference the workbook content online using the link below or run
 
 <img width="400" src="notebooks/figures/jupyter-binder.png"/>
 
-# Notes for me
+# Table of Contents
 
-TODO - create notes on how to create the pages static site so it builds and updates automagically on commit 
+The workbooks are ordered and do build on each other however if you are comfortable with preceeding workbooks you can dive in wherever.
+
+### [0. Control Flow](00.00-Control-Flow.ipynb)
+
+* Conditional statements (if, else, etc)
+* Loops
+
+### [1. Data Structures](notebooks/01.00-Data-Structures.ipynb)
+
+* Common Data Structures (tuples, lists, dicts, sets)
+* Additional Data Structures (chainmap, counter, etc)
+* Time Complexity (choosing the right data structure for the task)
+
+### [3. Functions](notebooks/03.00-Functions.ipynb)
+
+* Basic Functions
+* Generators
+* Lambda Expressions
+* Partial Functions
+* Nested Functions
+* Positional and Keyword Arguments (args and kwargs)
+
+### [4. Classes](notebooks/04.00-Classes.ipynb)
+
+* Basic Classes
+* Inheritance
+
+### [5. Permutations and Combinations](notebooks/05.00-Permutations-and-Combinations.ipynb)
+
+* Permutations
+* Combinations
+
+### [6. Logging, Errors and Exceptions](notebooks/06.00-Logging-Errors-and-Exceptions.ipynb)
+
+* Logging
+* Errors and Exceptions
+
+### [7. Decorators](notebooks/07.00-Decorators.ipynb)
+
+* Decorators

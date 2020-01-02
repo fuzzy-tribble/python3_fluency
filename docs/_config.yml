@@ -1,4 +1,4 @@
-theme: jekyll-theme-slate
+theme: minima
 title: Python Fluency Workbooks
 
 # This will require each of these plugins automatically.
