@@ -29,8 +29,6 @@ theme: minima
 # minima:
 #   skin: sunrise
 # remote_theme: THEME-NAME
-plugins:
-  - jekyll-feed
 
 # EXCLUDE from processing.
 # The following items will not be processed, by default.
@@ -51,7 +49,7 @@ exclude:
 # To add links to your SM accounts with icon, add the appropriate lines below
 minima:
   social_links:
-#     twitter: jekyllrb
     github: nancynobody
+#     twitter: jekyllrb
 #     dribbble: jekyll
 #     linkedin: jekyll
