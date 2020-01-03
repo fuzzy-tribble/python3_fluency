@@ -1,6 +1,0 @@
-theme: minima
-title: Python Fluency Workbooks
-
-# This will require each of these plugins automatically.
-# plugins:
-#   - jekyll-jupyter-notebook
