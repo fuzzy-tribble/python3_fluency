@@ -1,11 +1,1 @@
-title: Python Fluency Workbooks
-description: >-
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-
-remote_theme: nancynobody/ipynb_template_site
-
-# Google Analytics (will only appear in production, i.e., JEKYLL_ENV=production)
-# To enable, add the following lines to your Jekyll site
-#   google_analytics: UA-NNNNNNNN-N
+remote_theme: mmistakes/minimal-mistakes
