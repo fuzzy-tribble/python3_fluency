@@ -1,5 +1,9 @@
+# https://github.com/mmistakes/minimal-mistakes
 # remote_theme: mmistakes/minimal-mistakes
 # remote_theme: "mmistakes/minimal-mistakes@4.17.2"
 # remote_theme: mmistakes/minimal-mistakes@4.17.2
 # remote_theme: "mmistakes/minimal-mistakes"
+# remote_theme: mmistakes/minimal-mistakes
+
+# https://github.com/mmistakes/mm-github-pages-starter/blob/master/_config.yml
 remote_theme: mmistakes/minimal-mistakes
