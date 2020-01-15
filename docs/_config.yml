@@ -1,41 +1,75 @@
-# https://github.com/mmistakes/minimal-mistakes
-# remote_theme: mmistakes/minimal-mistakes
-# remote_theme: "mmistakes/minimal-mistakes@4.17.2"
-# remote_theme: mmistakes/minimal-mistakes@4.17.2
-# remote_theme: "mmistakes/minimal-mistakes"
-# remote_theme: mmistakes/minimal-mistakes --> works
+# Site settings
 
-# https://github.com/mmistakes/mm-github-pages-starter/blob/master/_config.yml
-# remote_theme: mmistakes/minimal-mistakes --> works
-remote_theme: mmistakes/mm-github-pages-starter
-
-# remote_theme: jekyll/minima --> works
-
-# remote_theme: nancynobody/ipynb_template_site
-
-title: MM
-email:
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Python Fluency
+author: Github User
+email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
-twitter_username: username
-github_username: username
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+# baseurl: "" # the subpath of your site, e.g. /blog
+# twitter_username: jekyllrb
+# github_username:  nancynobody
 
-author:
-  name   : "First Lastname"
-  avatar : "/assets/images/bio-photo.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
-  links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+# Site Collections (like posts but without pesky date/time requirements)
+collections:
+  notebooks:
+    output: true
+
+# Customize navigation links
+header_pages:
+  - pages/about.md
+
+# Build settings
+theme: minima
+# minima:
+#   skin: sunrise
+
+plugins:
+ - jekyll-seo-tag
+ - jekyll-feed
+
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+exclude:
+  - tools/
+  - notebooks/
+  - README.md
+
+include:
+  - assets/figures/
+  - assets/images/
+  - assets/img/
+  - assets/data/
+
+# Google Analytics (will only appear in production, i.e., JEKYLL_ENV=production)
+# To enable, add the following lines to your Jekyll site
+#   google_analytics: UA-NNNNNNNN-N
+
+# Social Networks
+# To add links to your SM accounts with icon, add the appropriate lines below
+minima:
+  social_links:
+    github: jekyll
+    twitter: jekyllrb
+    linkedin: jekyll
+#     dribbble: jekyll
+#     telegram: jekyll
+#     googleplus: +jekyll
+#     keybase: jekyll
+#     rss: rss
+
+#     mastodon:
+#      - username: jekyll
+#        instance: example.com
+#      - username: jekyll2
+#        instance: example.com
+
+    youtube: jekyll
+#     youtube_channel: UC8CXR0-3I70i1tfPg1PAE1g
+#     youtube_channel_name: CloudCannon
