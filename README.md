@@ -1,27 +1,25 @@
 # <img width="30" src="notebooks/figures/python-logo.png"/> Python Fluency Workbooks
 
+![Website](https://img.shields.io/badge/launch-website-yellow)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nancynobody/python3_fluency/tree/master/notebooks/master)
 
 This repository contains workbooks to help you become fluent in [Python](https://docs.python.org/3/).
 
 <img width="500" src="notebooks/figures/python-xkcdc.png"/>
 
-# How to use the content
+# Repo Structure
 
-You can either reference the workbook content online using the link below or run them interactively locally or using Jupyter's online tool nbviewer + binder.
+`/notebooks`: Contains the ipython notebooks
 
-* Read the workbook contents online at https://nancynobody.github.io/python3_fluency
+`/docs`: Contains the configs for the github pages website that is built from the `/notebooks` folder
 
-<img width="400" src="notebooks/figures/github-pages.png"/>
+# Usage
 
-* Clone the repo and execute the workbooks locally (find instructions here: https://jupyter.org/install)
+You can either [reference the workbook content online](https://nancynobody.github.io/python3_fluency) or run workbooks interactively.
 
-<img width="400" src="notebooks/figures/jupyter-local.png"/>
+## Run the Workbooks Interactively
+There are several options for running the workbooks interactively. Chose the one that best supports your purposes.
+
+* Clone the repo and **execute the workbooks locally** using Jupyter Notebook or Jupyter Lab (find instructions here: https://jupyter.org/install)
 
 * Launch a live notebook server with these notebooks using binder: https://nbviewer.jupyter.org/github/nancynobody/python3_fluency/tree/master/notebooks/
-
-<img width="400" src="notebooks/figures/jupyter-binder.png"/>
-
-# Notes for me
-
-TODO - create notes on how to create the pages static site so it builds and updates automagically on commit 

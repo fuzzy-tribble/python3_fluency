@@ -6,4 +6,4 @@ layout: home
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nancynobody/python3_fluency/tree/master/notebooks/master)
 
-This repository contains my ipython notebooks for bla bla bla bla.
+This website 
