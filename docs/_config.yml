@@ -7,3 +7,6 @@
 
 # https://github.com/mmistakes/mm-github-pages-starter/blob/master/_config.yml
 remote_theme: mmistakes/minimal-mistakes
+
+# TOTRY
+# remote_theme: jekyll/minima
