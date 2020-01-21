@@ -26,7 +26,7 @@ header_pages:
   - pages/about.md
 
 # Build settings
-remote_theme: nancynobody/ipynb_template_site
+remote_theme: nancynobody/minima-ipynb
 # minima:
 #   skin: sunrise
 
