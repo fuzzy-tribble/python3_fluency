@@ -27,8 +27,6 @@ header_pages:
 
 # Build settings
 remote_theme: nancynobody/minima-ipynb
-# minima:
-#   skin: sunrise
 
 plugins:
  - jekyll-seo-tag
@@ -36,16 +34,16 @@ plugins:
 
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
-exclude:
-  - tools/
-  - notebooks/
-  - README.md
+# exclude:
+#   - tools/
+#   - notebooks/
+#   - README.md
 
-include:
-  - assets/figures/
-  - assets/images/
-  - assets/img/
-  - assets/data/
+# include:
+#   - assets/figures/
+#   - assets/images/
+#   - assets/img/
+#   - assets/data/
 
 # Google Analytics (will only appear in production, i.e., JEKYLL_ENV=production)
 # To enable, add the following lines to your Jekyll site
