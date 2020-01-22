@@ -9,9 +9,11 @@ This repository contains workbooks to help you become fluent in [Python](https:/
 
 # Repo Structure
 
+`/docs`: Contains the configs for the github pages website that is built from the `/notebooks` folder
+
 `/notebooks`: Contains the ipython notebooks
 
-`/docs`: Contains the configs for the github pages website that is built from the `/notebooks` folder
+`/tools_ipynb_to_jekyll`: Contains script tools to convert ipython notebooks to jekyll readble format including any front matter, etc you add
 
 # Usage
 
