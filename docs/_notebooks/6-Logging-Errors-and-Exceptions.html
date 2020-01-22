@@ -1,0 +1,1488 @@
+---
+layout: notebook
+title: Logging Errors and Exceptions in Python
+permalink: /logging-errors-and-exceptions-in-python/
+topics: ['Logging', 'Errors and Exceptions']
+---
+<!--NB_INFO--><img align="left" width="30" style="padding-right:10px;" src="{{ '/assets/images/python-logo.png' | relative_url }}"><p style="font-style:italic;font-size:smaller;">This notebook is part of the {{ site.title }}; the content is available <a href="https://github.com/nancynobody">on GitHub</a>.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><!-- NAV --><p style="font-style:italic;font-size:smaller;">&lt; <a href="{{ "permutations-and-combinations-in-python" | relative_url }}">Permutations and Combinations in Python</a> | <a href="/ipynb_template_site/">Contents</a> | <a href="{{ "decorators-in-python" | relative_url }}">Decorators in Python</a> &gt;</p><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Logging,-Errors-and-Exceptions-in-Python">Logging, Errors and Exceptions in Python<a class="anchor-link" href="#Logging,-Errors-and-Exceptions-in-Python">&#182;</a></h1><p><strong>Purpose:</strong> The purpose of this workbook is to help you get comfortable with logging, errors and exceptions in Python3.</p>
+<p><strong>Recomended Usage</strong></p>
+<ul>
+<li>Run each of the cells (Shift+Enter) and edit them as necessary to solidify your understanding</li>
+<li>Do any of the exercises that are relevant to helping you understand the material</li>
+</ul>
+<p><strong>Topics Covered</strong></p>
+<ul>
+<li>Logging</li>
+<li>Errors and Exceptions</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Workbook-Setup">Workbook Setup<a class="anchor-link" href="#Workbook-Setup">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Troubleshooting-Tips">Troubleshooting Tips<a class="anchor-link" href="#Troubleshooting-Tips">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you run into issues running any of the code in this notebook, check your version of Jupyter, extensions, etc.</p>
+<div class="highlight"><pre><span></span>!jupyter --version
+
+jupyter core     : <span class="m">4</span>.6.1
+jupyter-notebook : <span class="m">6</span>.0.2
+qtconsole        : not installed
+ipython          : <span class="m">7</span>.9.0
+ipykernel        : <span class="m">5</span>.1.3
+jupyter client   : <span class="m">5</span>.3.4
+jupyter lab      : <span class="m">1</span>.2.3
+nbconvert        : <span class="m">5</span>.6.1
+ipywidgets       : not installed
+nbformat         : <span class="m">4</span>.4.0
+traitlets        : <span class="m">4</span>.3.3
+</pre></div>
+<div class="highlight"><pre><span></span>!jupyter-labextension list
+
+JupyterLab v1.2.3
+Known labextensions:
+   app dir: /usr/local/share/jupyter/lab
+        @aquirdturtle/collapsible_headings v0.5.0  enabled  OK
+        @jupyter-widgets/jupyterlab-manager v1.1.0  enabled  OK
+        @jupyterlab/git v0.8.2  enabled  OK
+        @jupyterlab/github v1.0.1  enabled  OK
+        jupyterlab-flake8 v0.4.0  enabled  OK
+
+Uninstalled core extensions:
+    @jupyterlab/github
+    jupyterlab-flake8
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!jupyter --version</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!jupyter-labextension list</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Notebook-Configs">Notebook Configs<a class="anchor-link" href="#Notebook-Configs">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># AUTO GENERATED CELL FOR NOTEBOOK SETUP</span>
+
+<span class="c1"># NOTEBOOK WIDE MAGICS</span>
+
+<span class="c1"># Reload all modules before executing a new line</span>
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+
+<span class="c1"># Abide by PEP8 code style</span>
+<span class="o">%</span><span class="k">load_ext</span> pycodestyle_magic
+<span class="o">%</span><span class="k">pycodestyle_on</span>
+
+<span class="c1"># LIBRARY SPECIFIC MAGICS - UNCOMMENT AS NEEDED</span>
+
+<span class="c1"># Plot all matplotlib plots in output cell and save on close</span>
+<span class="c1"># %matplotlib inline</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Logging">Logging<a class="anchor-link" href="#Logging">&#182;</a></h1><p>Usage and best practices for using Pythons native logging module.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Loggers,-Levels,-Formatters-and-Handlers">Loggers, Levels, Formatters and Handlers<a class="anchor-link" href="#Loggers,-Levels,-Formatters-and-Handlers">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To get started with Python's logging module you need to understand loggers, handlers and formatters:</p>
+<blockquote><p><strong>Loggers</strong> have <strong>levels</strong> (how severe the issue is) and <strong>handlers</strong> (that tell it where to put the information) which have <strong>formatters</strong> (which tell it how to format/display the information).</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Get-or-create-loggers">Get or create loggers<a class="anchor-link" href="#Get-or-create-loggers">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Python's native logging module is hierarchical. There is a default root logger then when you add custom loggers you are adding "children".</p>
+<p><strong>NOTE:</strong> The root logger (<code>logging.root</code> - top of the logging hierarchy) is called when methods like <code>logging.debug()</code> is used.</p>
+<p><strong>Using the root logger directly or indirectly via methods like logging.debug() is generally not recommended. Instead, create your own loggers.</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test1_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test1_logger</span>  <span class="c1"># Defaults to root logger (b/c no name specified)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;RootLogger root (WARNING)&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>Note: You can see the root logger has default logging level set to "WARNING"</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get or create a logger named &quot;test2&quot;</span>
+<span class="n">test2_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;test2&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">test2_logger</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test2_logger</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">test2_logger</span><span class="o">.</span><span class="n">parent</span> <span class="o">==</span> <span class="n">logging</span><span class="o">.</span><span class="n">root</span>  <span class="c1"># The parent is the root logger</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;Logger test2 (WARNING)&gt;
+&lt;RootLogger root (WARNING)&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Hierarchal-loggers-use-dot-notation">Hierarchal loggers use dot notation<a class="anchor-link" href="#Hierarchal-loggers-use-dot-notation">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create logger &#39;t&#39;</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">t</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[23]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;Logger t (WARNING)&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t</span><span class="o">.</span><span class="n">parent</span>  <span class="c1"># the parent of &#39;t&#39; is root</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[25]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;RootLogger root (WARNING)&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create logger &#39;a&#39; as sublogger of &#39;t&#39;</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;t.a&quot;</span><span class="p">)</span>
+<span class="n">a</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[26]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;Logger t.a (WARNING)&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">parent</span>  <span class="c1"># &#39;t&#39; is the parent of &#39;a&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[29]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;Logger t (WARNING)&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span>  <span class="c1"># Root is the parent of the parent of &#39;a&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[31]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;RootLogger root (WARNING)&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Inspect-your-logger's-default-settings-(log-level-and-handlers)">Inspect your logger's default settings (log level and handlers)<a class="anchor-link" href="#Inspect-your-logger's-default-settings-(log-level-and-handlers)">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can check if a logger has a handler using <code>hasHandler()</code> and check the log level using <code>getEffectiveLevel()</code> (the numerical value associated with WARNING, ERROR, etc)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Handlers for </span><span class="si">{}</span><span class="s1"> logger? </span><span class="si">{}</span><span class="s1">&#39;</span>
+      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test1_logger</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">test1_logger</span><span class="o">.</span><span class="n">hasHandlers</span><span class="p">()))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Handlers for </span><span class="si">{}</span><span class="s1"> logger? </span><span class="si">{}</span><span class="s1">&#39;</span>
+      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test2_logger</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">test2_logger</span><span class="o">.</span><span class="n">hasHandlers</span><span class="p">()))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Handlers for root logger? False
+Handlers for test2 logger? False
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can see there are no handlers for these loggers. When you try to log something without having assigned a handler, it will automatically use the default handler (console).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Level for </span><span class="si">{}</span><span class="s1"> logger? </span><span class="si">{}</span><span class="s1">&#39;</span>
+      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test1_logger</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">test1_logger</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">()))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Level for </span><span class="si">{}</span><span class="s1"> logger? </span><span class="si">{}</span><span class="s1">&#39;</span>
+      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test2_logger</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">test2_logger</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">()))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Level for root logger? 30
+Level for test2 logger? 30
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># If you log a message &gt; WARN using root logger it will create a default handler</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test1_logger</span><span class="o">.</span><span class="n">hasHandlers</span><span class="p">())</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;test error message for root logger&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">test1_logger</span><span class="o">.</span><span class="n">hasHandlers</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>ERROR:root:test error message for root logger
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>False
+True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Create-handlers">Create handlers<a class="anchor-link" href="#Create-handlers">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Each handler has:</p>
+<ul>
+<li><p>A formatter which adds context information to a log.</p>
+</li>
+<li><p>A log level that filters out lower level logs (ie. a log handler with INFO level will not handle DEBUG logs)</p>
+</li>
+</ul>
+<p>Formatter example:</p>
+<p><code>"%(asctime)s — %(name)s — %(levelname)s — %(funcName)s:%(lineno)d — %(message)s"</code></p>
+<p>will output</p>
+<p><code>2018-02-07 19:47:41,864 - a.b.c - WARNING - &lt;module&gt;:1 - your log message</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">console_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<span class="n">console_handler</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[36]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;StreamHandler stderr (NOTSET)&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">)</span>
+<span class="n">file_handler</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[37]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;FileHandler /Users/elias/jupyter-notebooks/python3_fluency/filename (NOTSET)&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Create-log-messages">Create log messages<a class="anchor-link" href="#Create-log-messages">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If the log level is lower than logger level, the log will be ignored</p>
+<p>Basically, when you create a logger you say "show me anything above this level of severity, ignore everything else".</p>
+<p>Here are the 6 log levels</p>
+<table>
+<thead><tr>
+<th>6 Log Levels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NOTSET=0</code></td>
+</tr>
+<tr>
+<td><code>DEBUG=10</code></td>
+</tr>
+<tr>
+<td><code>INFO=20</code></td>
+</tr>
+<tr>
+<td><code>WARN=30</code></td>
+</tr>
+<tr>
+<td><code>ERROR=40</code></td>
+</tr>
+<tr>
+<td><code>CRITICAL=50</code></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Practical-Logging-Examples">Practical Logging Examples<a class="anchor-link" href="#Practical-Logging-Examples">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Best practices</strong></p>
+<ul>
+<li><p>Configure the root logger but never use it in your code—e.g., never call a function like <code>logging.info()</code></p>
+</li>
+<li><p>To use logging, make sure to create a new logger by using <code>logging.getLogger(__name__)</code>.</p>
+</li>
+</ul>
+<p><em>Note: Logs can get...quite long. So you may want to use classes like <code>RotatingFileHandler</code> to rotate the file for you automatically when the file reaches a size limit or do it everyday. You may also want to look into tools like Sentry or Airbrake for really long logs like from WebApps.</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Example-1:-Logging-w/-default-handler-and-formatter">Example 1: Logging w/ default handler and formatter<a class="anchor-link" href="#Example-1:-Logging-w/-default-handler-and-formatter">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hasHandlers? </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">logger</span><span class="o">.</span><span class="n">hasHandlers</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;getEffectiveLevel? </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">logger</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">()))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;Logger __main__ (WARNING)&gt;
+hasHandlers? True
+getEffectiveLevel? 30
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Debug and info messages should be ignored because our log level is WARNING</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;my DEBUG message&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;my INFO message&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;my WARNING message&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;my ERROR message&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;my CRITICAL message&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>WARNING:__main__:my WARNING message
+ERROR:__main__:my ERROR message
+CRITICAL:__main__:my CRITICAL message
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Example-2:-Logging-w/-custom-handler-and-formatter">Example 2: Logging w/ custom handler and formatter<a class="anchor-link" href="#Example-2:-Logging-w/-custom-handler-and-formatter">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get or create a logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Set log level</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="c1"># Define file handler and set formatter</span>
+<span class="n">file_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="s1">&#39;logfile.log&#39;</span><span class="p">)</span>
+<span class="n">format_str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> : </span><span class="si">%(levelname)s</span><span class="s1"> : </span><span class="si">%(name)s</span><span class="s1"> : </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="n">format_str</span><span class="p">)</span>
+<span class="n">file_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+
+<span class="c1"># Add file handler to logger</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;A debug message&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;An info message&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Something is not right.&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;A Major error has happened.&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;Fatal error. Cannot continue&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>DEBUG:__main__:A debug message
+INFO:__main__:An info message
+WARNING:__main__:Something is not right.
+ERROR:__main__:A Major error has happened.
+CRITICAL:__main__:Fatal error. Cannot continue
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can checkout the log file that was just created.</p>
+<p>Notice the format for the log file vs the console output is different, that is because its being handled by a different handler. The default console handler and the log file handler we just created.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>cat logfile.log
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>2019-11-17 13:04:07,452 : DEBUG : __main__ : A debug message
+2019-11-17 13:04:07,453 : INFO : __main__ : An info message
+2019-11-17 13:04:07,454 : WARNING : __main__ : Something is not right.
+2019-11-17 13:04:07,458 : ERROR : __main__ : A Major error has happened.
+2019-11-17 13:04:07,460 : CRITICAL : __main__ : Fatal error. Cannot continue
+2019-11-17 13:08:42,216 : ERROR : __main__ : Division by zero problem
+Traceback (most recent call last):
+  File &#34;&lt;ipython-input-110-0b146286ffa0&gt;&#34;, line 11, in divide
+    out = x / y
+ZeroDivisionError: division by zero
+2019-11-17 13:08:42,218 : ERROR : __main__ : Divide 10 / 0 = None
+2019-11-17 13:09:45,936 : ERROR : __main__ : Division by zero problem
+Traceback (most recent call last):
+  File &#34;&lt;ipython-input-110-0b146286ffa0&gt;&#34;, line 11, in divide
+    out = x / y
+ZeroDivisionError: division by zero
+2019-11-18 12:46:34,170 : DEBUG : __main__ : A debug message
+2019-11-18 12:46:34,170 : DEBUG : __main__ : A debug message
+2019-11-18 12:46:34,170 : DEBUG : __main__ : A debug message
+2019-11-18 12:46:34,170 : DEBUG : __main__ : A debug message
+2019-11-18 12:46:34,173 : INFO : __main__ : An info message
+2019-11-18 12:46:34,173 : INFO : __main__ : An info message
+2019-11-18 12:46:34,173 : INFO : __main__ : An info message
+2019-11-18 12:46:34,173 : INFO : __main__ : An info message
+2019-11-18 12:46:34,174 : WARNING : __main__ : Something is not right.
+2019-11-18 12:46:34,174 : WARNING : __main__ : Something is not right.
+2019-11-18 12:46:34,174 : WARNING : __main__ : Something is not right.
+2019-11-18 12:46:34,174 : WARNING : __main__ : Something is not right.
+2019-11-18 12:46:34,175 : ERROR : __main__ : A Major error has happened.
+2019-11-18 12:46:34,175 : ERROR : __main__ : A Major error has happened.
+2019-11-18 12:46:34,175 : ERROR : __main__ : A Major error has happened.
+2019-11-18 12:46:34,175 : ERROR : __main__ : A Major error has happened.
+2019-11-18 12:46:34,176 : CRITICAL : __main__ : Fatal error. Cannot continue
+2019-11-18 12:46:34,176 : CRITICAL : __main__ : Fatal error. Cannot continue
+2019-11-18 12:46:34,176 : CRITICAL : __main__ : Fatal error. Cannot continue
+2019-11-18 12:46:34,176 : CRITICAL : __main__ : Fatal error. Cannot continue
+2019-11-18 12:48:07,287 : ERROR : __main__ : Division by zero problem
+Traceback (most recent call last):
+  File &#34;&lt;ipython-input-49-b3de6ac2c9d7&gt;&#34;, line 11, in divide
+    out = x / y
+ZeroDivisionError: division by zero
+2019-11-18 12:48:07,287 : ERROR : __main__ : Division by zero problem
+Traceback (most recent call last):
+  File &#34;&lt;ipython-input-49-b3de6ac2c9d7&gt;&#34;, line 11, in divide
+    out = x / y
+ZeroDivisionError: division by zero
+2019-11-18 12:48:07,287 : ERROR : __main__ : Division by zero problem
+Traceback (most recent call last):
+  File &#34;&lt;ipython-input-49-b3de6ac2c9d7&gt;&#34;, line 11, in divide
+    out = x / y
+ZeroDivisionError: division by zero
+2019-11-18 12:48:07,287 : ERROR : __main__ : Division by zero problem
+Traceback (most recent call last):
+  File &#34;&lt;ipython-input-49-b3de6ac2c9d7&gt;&#34;, line 11, in divide
+    out = x / y
+ZeroDivisionError: division by zero
+2019-11-18 12:48:12,473 : ERROR : __main__ : Division by zero problem
+Traceback (most recent call last):
+  File &#34;&lt;ipython-input-49-b3de6ac2c9d7&gt;&#34;, line 11, in divide
+    out = x / y
+ZeroDivisionError: division by zero
+2019-11-18 12:48:12,473 : ERROR : __main__ : Division by zero problem
+Traceback (most recent call last):
+  File &#34;&lt;ipython-input-49-b3de6ac2c9d7&gt;&#34;, line 11, in divide
+    out = x / y
+ZeroDivisionError: division by zero
+2019-11-18 12:48:12,473 : ERROR : __main__ : Division by zero problem
+Traceback (most recent call last):
+  File &#34;&lt;ipython-input-49-b3de6ac2c9d7&gt;&#34;, line 11, in divide
+    out = x / y
+ZeroDivisionError: division by zero
+2019-11-18 12:48:12,473 : ERROR : __main__ : Division by zero problem
+Traceback (most recent call last):
+  File &#34;&lt;ipython-input-49-b3de6ac2c9d7&gt;&#34;, line 11, in divide
+    out = x / y
+ZeroDivisionError: division by zero
+2019-11-25 13:18:20,161 : DEBUG : __main__ : A debug message
+2019-11-25 13:18:20,165 : INFO : __main__ : An info message
+2019-11-25 13:18:20,166 : WARNING : __main__ : Something is not right.
+2019-11-25 13:18:20,167 : ERROR : __main__ : A Major error has happened.
+2019-11-25 13:18:20,167 : CRITICAL : __main__ : Fatal error. Cannot continue
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Example-3:-Logging-an-exception/error-(div-by-0)">Example 3: Logging an exception/error (div by 0)<a class="anchor-link" href="#Example-3:-Logging-an-exception/error-(div-by-0)">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create or get the logger</span>
+<span class="n">my_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Set log level</span>
+<span class="n">my_logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+
+<span class="c1"># Define function</span>
+<span class="k">def</span> <span class="nf">divide</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="n">my_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Division by zero problem&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>ERROR:__main__:Division by zero problem
+Traceback (most recent call last):
+  File &#34;&lt;ipython-input-13-93bdd46699a6&gt;&#34;, line 11, in divide
+    out = x / y
+ZeroDivisionError: division by zero
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Errors-and-Exceptions">Errors and Exceptions<a class="anchor-link" href="#Errors-and-Exceptions">&#182;</a></h1><p>Raising and handling default and custom exceptions</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check out how try statements work <a href="https://docs.python.org/3/tutorial/errors.html#handling-exceptions">in the docs</a> if you need some more background.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Basic-try-except">Basic try-except<a class="anchor-link" href="#Basic-try-except">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Pretend you wrote some code here that threw a ValueError</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Oops!  That was no valid number.  Try again...&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Oops!  That was no valid number.  Try again...
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Raise-exception">Raise exception<a class="anchor-link" href="#Raise-exception">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Raise an exception with custom message</span>
+<span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;custom message&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-3-558a6c8cd86b&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg"># Raise an exception with custom message</span>
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;custom message&#34;</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">ValueError</span>: custom message</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Define-custom-exceptions">Define custom exceptions<a class="anchor-link" href="#Define-custom-exceptions">&#182;</a></h3><p>This example is <a href="https://docs.python.org/3/tutorial/errors.html#user-defined-exceptions">directly from the docs</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Error</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for exceptions in this module.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">InputError</span><span class="p">(</span><span class="n">Error</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Exception raised for errors in the input.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        expression -- input expression in which the error occurred</span>
+<span class="sd">        message -- explanation of the error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expression</span> <span class="o">=</span> <span class="n">expression</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+
+<span class="k">class</span> <span class="nc">TransitionError</span><span class="p">(</span><span class="n">Error</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Raised when an operation attempts a state transition that&#39;s not</span>
+<span class="sd">    allowed.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        previous -- state at beginning of transition</span>
+<span class="sd">        next -- attempted new state</span>
+<span class="sd">        message -- explanation of why the specific transition is not allowed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">previous</span><span class="p">,</span> <span class="nb">next</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous</span> <span class="o">=</span> <span class="n">previous</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Catchall-Wildcard">Catchall Wildcard<a class="anchor-link" href="#Catchall-Wildcard">&#182;</a></h3><p>The last except in the code below will catch anything that wasn't an OSError or ValueError.</p>
+<p><em>Note: Carefull using wildcard catchalls so you don't mask the real programming error. As a general rule try and be as specific as possible and pass the error if up the chain if necessary.</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[120]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;myfile.txt&#39;</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OS error: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not convert data to an integer.&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unexpected error:&quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">raise</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>OS error: [Errno 2] No such file or directory: &#39;myfile.txt&#39;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can see because there is no file called 'myfile.txt' for you to open an <code>OSError</code> exception is thrown.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Finally-is-always-executed">Finally is always executed<a class="anchor-link" href="#Finally-is-always-executed">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[121]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">KeyboardInterrupt</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Goodbye, world!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Goodbye, world!
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-121-ca8991ac7661&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">raise</span> KeyboardInterrupt
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span>     print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;Goodbye, world!&#39;</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Else-is-executed-IFF-try-works">Else is executed IFF try works<a class="anchor-link" href="#Else-is-executed-IFF-try-works">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[128]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Else is executed</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;trying worked&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;inside OSError&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;inside else&quot;</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;inside finally&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>trying worked
+inside else
+inside finally
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[127]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Else isn&#39;t executed</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s2">&quot;some OS error&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">RuntimeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;inside OSError&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;inside else&quot;</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;inside finally&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>inside OSError
+inside finally
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+ 
+
