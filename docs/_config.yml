@@ -5,16 +5,16 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Python Fluency
-author: Github User
-email: your-email@example.com
+author: nancynobody
+# email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  The purpose of this site is to help you become comfortable in core Python concepts.
+  It was originally written with data science practitioners in mind but is applicable
+  to anyone learning Python or brush up on it if you haven't used it for a while.
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # baseurl: "" # the subpath of your site, e.g. /blog
-# twitter_username: jekyllrb
-# github_username:  nancynobody
+# twitter_username: nancynobody
+github_username:  nancynobody
 
 # Site Collections (like posts but without pesky date/time requirements)
 collections:
@@ -22,8 +22,8 @@ collections:
     output: true
 
 # Customize navigation links
-header_pages:
-  - pages/about.md
+# header_pages:
+#   - pages/about.md
 
 # Build settings
 remote_theme: nancynobody/minima-ipynb
@@ -31,13 +31,6 @@ remote_theme: nancynobody/minima-ipynb
 plugins:
  - jekyll-seo-tag
  - jekyll-feed
-
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-# exclude:
-#   - tools/
-#   - notebooks/
-#   - README.md
 
 # include:
 #   - assets/figures/
@@ -53,21 +46,5 @@ plugins:
 # To add links to your SM accounts with icon, add the appropriate lines below
 minima:
   social_links:
-    github: jekyll
-    twitter: jekyllrb
-    linkedin: jekyll
-#     dribbble: jekyll
-#     telegram: jekyll
-#     googleplus: +jekyll
-#     keybase: jekyll
-#     rss: rss
-
-#     mastodon:
-#      - username: jekyll
-#        instance: example.com
-#      - username: jekyll2
-#        instance: example.com
-
+    github: nancynobody
     youtube: jekyll
-#     youtube_channel: UC8CXR0-3I70i1tfPg1PAE1g
-#     youtube_channel_name: CloudCannon
