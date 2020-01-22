@@ -9,11 +9,11 @@ This repository contains workbooks to help you become fluent in [Python](https:/
 
 # Repo Structure
 
-`/docs`: Contains the configs for the github pages website that is built from the `/notebooks` folder
+`/docs`: Contains the configs for the github pages website
 
-`/notebooks`: Contains the ipython notebooks
+`/notebooks`: Contains the ipython notebooks (.ipynb)
 
-`/tools_ipynb_to_jekyll`: A Git Submodule that contains script tools to convert ipython notebooks to jekyll readble format including front matter, cutom nav, etc.
+`/tools_ipynb_to_jekyll`: A Git Submodule that contains script tools to convert ipython notebooks to jekyll readble format including front matter, custom nav, etc.
 
 # Usage
 
@@ -28,6 +28,6 @@ There are several options for running the workbooks interactively. Chose the one
 
 ---
 
-# Want to create an site form your ipython notebooks like this?
+**Want to create an site from your ipython notebooks like this?**
 
-[Checkout repo to learn how](https://github.com/nancynobody/minima-ipynb)
+[Checkout this repo to learn how](https://github.com/nancynobody/minima-ipynb)
