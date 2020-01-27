@@ -23,12 +23,12 @@ collections:
 
 nb_info: >-
   <!--NB_INFO-->
-  <img align="left" width="30" style="padding-right:10px;" src="{{ '/assets/figures/python-logo.png' | relative_url }}">
-  <p style="font-style:italic;font-size:smaller;">
-  This notebook is part of the {{ site.title }}; the content is available 
+  <sub><sup>
+  The content for this site available 
   <a href="https://github.com/nancynobody/python3_fluency">on GitHub</a>. 
   If you want to launch the notebooks interactively click on the binder stamp below 
-  to launch a live notebook server or download the notebooks and run them locally.</p>
+  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nancynobody/python3_fluency/tree/master/notebooks/master)
+  </sup></sub>
 # Customize navigation links
 # header_pages:
 #   - pages/about.md
