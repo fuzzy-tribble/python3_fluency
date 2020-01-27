@@ -4,7 +4,8 @@ title: Logging Errors and Exceptions in Python
 permalink: /logging-errors-and-exceptions-in-python/
 topics: ['Logging', 'Errors and Exceptions']
 ---
-<!--NB_INFO--><img align="left" width="30" style="padding-right:10px;" src="{{ '/assets/images/python-logo.png' | relative_url }}"><p style="font-style:italic;font-size:smaller;">This notebook is part of the {{ site.title }}; the content is available <a href="https://github.com/nancynobody">on GitHub</a>.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><!-- NAV --><p style="font-style:italic;font-size:smaller;">&lt; <a href="{{ "permutations-and-combinations-in-python" | relative_url }}">Permutations and Combinations in Python</a> | <a href="/ipynb_template_site/">Contents</a> | <a href="{{ "decorators-in-python" | relative_url }}">Decorators in Python</a> &gt;</p><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<!--NB_INFO--><img align="left" width="30" style="padding-right:10px;" src="{{ '/assets/figures/python-logo.png' | relative_url }}"><p style="font-style:italic;font-size:smaller;">This notebook is part of the {{ site.title }}; the content is available <a href="https://github.com/nancynobody/python3_fluency">on GitHub</a>. If you want to launch the notebooks interactively click on the binder stamp below to launch a live notebook server or download the notebooks and run them locally. .</p>
+<!-- NAV --><p style="font-style:italic;font-size:smaller;">&lt; <a href="{{ "data-structures-in-python" | relative_url }}">Data Structures in Python</a> | <a href="{{{{ "/" | relative_url }}}}">Contents</a> | <a href="{{ "decorators-in-python" | relative_url }}">Decorators in Python</a> &gt;</p><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Logging,-Errors-and-Exceptions-in-Python">Logging, Errors and Exceptions in Python<a class="anchor-link" href="#Logging,-Errors-and-Exceptions-in-Python">&#182;</a></h1><p><strong>Purpose:</strong> The purpose of this workbook is to help you get comfortable with logging, errors and exceptions in Python3.</p>
@@ -116,12 +117,12 @@ Uninstalled core extensions:
 <span class="c1"># NOTEBOOK WIDE MAGICS</span>
 
 <span class="c1"># Reload all modules before executing a new line</span>
-<span class="o">%</span><span class="k">load_ext</span> autoreload
-<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
 
 <span class="c1"># Abide by PEP8 code style</span>
-<span class="o">%</span><span class="k">load_ext</span> pycodestyle_magic
-<span class="o">%</span><span class="k">pycodestyle_on</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">pycodestyle_magic</span>
+<span class="o">%</span><span class="n">pycodestyle_on</span>
 
 <span class="c1"># LIBRARY SPECIFIC MAGICS - UNCOMMENT AS NEEDED</span>
 
@@ -937,7 +938,7 @@ CRITICAL:__main__:Fatal error. Cannot continue
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>cat logfile.log
+<div class=" highlight hl-ipython3"><pre><span></span><span class="err">!</span><span class="n">cat</span> <span class="n">logfile</span><span class="o">.</span><span class="n">log</span>
 </pre></div>
 
     </div>
@@ -1240,7 +1241,7 @@ ZeroDivisionError: division by zero
 <span class="sd">        message -- explanation of the error</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">expression</span> <span class="o">=</span> <span class="n">expression</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
 
@@ -1254,7 +1255,7 @@ ZeroDivisionError: division by zero
 <span class="sd">        message -- explanation of why the specific transition is not allowed</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">previous</span><span class="p">,</span> <span class="nb">next</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">previous</span><span class="p">,</span> <span class="nb">next</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">previous</span> <span class="o">=</span> <span class="n">previous</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>

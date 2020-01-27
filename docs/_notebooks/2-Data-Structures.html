@@ -4,7 +4,8 @@ title: Data Structures in Python
 permalink: /data-structures-in-python/
 topics: ['Common Data Structures', 'Additional Data Structures', 'Time Complexity']
 ---
-<!--NB_INFO--><img align="left" width="30" style="padding-right:10px;" src="{{ '/assets/images/python-logo.png' | relative_url }}"><p style="font-style:italic;font-size:smaller;">This notebook is part of the {{ site.title }}; the content is available <a href="https://github.com/nancynobody">on GitHub</a>.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><!-- NAV --><p style="font-style:italic;font-size:smaller;">&lt; <a href="{{ "control-flow-in-python" | relative_url }}">Control Flow in Python</a> | <a href="/ipynb_template_site/">Contents</a> | <a href="{{ "functions-in-python" | relative_url }}">Functions in Python</a> &gt;</p><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<!--NB_INFO--><img align="left" width="30" style="padding-right:10px;" src="{{ '/assets/figures/python-logo.png' | relative_url }}"><p style="font-style:italic;font-size:smaller;">This notebook is part of the {{ site.title }}; the content is available <a href="https://github.com/nancynobody/python3_fluency">on GitHub</a>. If you want to launch the notebooks interactively click on the binder stamp below to launch a live notebook server or download the notebooks and run them locally. .</p>
+<!-- NAV --><p style="font-style:italic;font-size:smaller;">&lt; <a href="{{ "control-flow-in-python" | relative_url }}">Control Flow in Python</a> | <a href="{{{{ "/" | relative_url }}}}">Contents</a> | <a href="{{ "logging-errors-and-exceptions-in-python" | relative_url }}">Logging Errors and Exceptions in Python</a> &gt;</p><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Data-Structures-in-Python">Data Structures in Python<a class="anchor-link" href="#Data-Structures-in-Python">&#182;</a></h1><p><strong>Purpose:</strong> The purpose of this workbook is to help you get comfortable with data structures and time complexity in Python3.</p>
@@ -117,12 +118,12 @@ Uninstalled core extensions:
 <span class="c1"># NOTEBOOK WIDE MAGICS</span>
 
 <span class="c1"># Reload all modules before executing a new line</span>
-<span class="o">%</span><span class="k">load_ext</span> autoreload
-<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
 
 <span class="c1"># Abide by PEP8 code style</span>
-<span class="o">%</span><span class="k">load_ext</span> pycodestyle_magic
-<span class="o">%</span><span class="k">pycodestyle_on</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">pycodestyle_magic</span>
+<span class="o">%</span><span class="n">pycodestyle_on</span>
 
 <span class="c1"># LIBRARY SPECIFIC MAGICS - UNCOMMENT AS NEEDED</span>
 
@@ -649,7 +650,7 @@ Uninstalled core extensions:
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fruit</span> <span class="o">=</span> <span class="s1">&#39;   banana&#39;</span>
-fruit.strip<span class="o">?</span>
+<span class="n">fruit</span><span class="o">.</span><span class="n">strip</span><span class="err">?</span>
 </pre></div>
 
     </div>
@@ -891,7 +892,7 @@ If chars is given and not None, remove characters in chars instead.
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>enumerate<span class="o">?</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">enumerate</span><span class="err">?</span>
 </pre></div>
 
     </div>
@@ -1035,7 +1036,7 @@ enumerate is useful for obtaining an indexed list:
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>zip<span class="o">?</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">zip</span><span class="err">?</span>
 </pre></div>
 
     </div>
@@ -2013,7 +2014,7 @@ Unique letters in b: {&#39;f&#39;, &#39;e&#39;, &#39;a&#39;, &#39;d&#39;}
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
     </div>
