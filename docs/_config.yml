@@ -21,6 +21,8 @@ collections:
   notebooks:
     output: true
 
+# NB Info will be included at the top of each nb page that is built
+# Use an empty string if you don't want any nb_info
 nb_info: >-
   <!--NB_INFO-->
   <sub><sup>
@@ -29,9 +31,10 @@ nb_info: >-
   If you want to launch the notebooks interactively click on the binder stamp below 
   [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nancynobody/python3_fluency/tree/master/notebooks/master)
   </sup></sub>
+
 # Customize navigation links
-# header_pages:
-#   - pages/about.md
+header_pages:
+  - pages/about.md
 
 # Build settings
 remote_theme: nancynobody/minima-ipynb
