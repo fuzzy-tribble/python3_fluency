@@ -29,7 +29,7 @@ nb_info: >-
   The content for this site available 
   <a href="https://github.com/nancynobody/python3_fluency">on GitHub</a>. 
   If you want to launch the notebooks interactively click on the binder stamp below.
-  <a href="https://mybinder.org/v2/gh/nancynobody/python3_fluency/tree/master/notebooks/master"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a>
+  <a href="https://mybinder.org/v2/gh/nancynobody/python3_fluency/master"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a>
   </sup></sub>
 
 # Customize navigation links

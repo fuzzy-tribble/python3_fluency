@@ -9,7 +9,7 @@ topics: ['Conditional Statements', 'Loops']
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Control-Flow-in-Python">Control Flow in Python<a class="anchor-link" href="#Control-Flow-in-Python">&#182;</a></h1><p><strong>Purpose:</strong> The purpose of this workbook is to help you get comfortable with control flow in Python3.</p>
+<h1 id="Control-Flow-in-Python">Control Flow in Python<a class="anchor-link" href="#Control-Flow-in-Python">&#182;</a></h1><p><strong>Purpose:</strong> To help you get practiced and comfortable with the topics outlined below.</p>
 <p><strong>Recomended Usage</strong></p>
 <ul>
 <li>Run each of the cells (Shift+Enter) and edit them as necessary to solidify your understanding</li>
@@ -34,101 +34,21 @@ topics: ['Conditional Statements', 'Loops']
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Troubleshooting-Tips">Troubleshooting Tips<a class="anchor-link" href="#Troubleshooting-Tips">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>If you run into issues running any of the code in this notebook, check your version of Jupyter, extensions, etc.</p>
-<div class="highlight"><pre><span></span>!jupyter --version
-
-jupyter core     : <span class="m">4</span>.6.1
-jupyter-notebook : <span class="m">6</span>.0.2
-qtconsole        : not installed
-ipython          : <span class="m">7</span>.9.0
-ipykernel        : <span class="m">5</span>.1.3
-jupyter client   : <span class="m">5</span>.3.4
-jupyter lab      : <span class="m">1</span>.2.3
-nbconvert        : <span class="m">5</span>.6.1
-ipywidgets       : not installed
-nbformat         : <span class="m">4</span>.4.0
-traitlets        : <span class="m">4</span>.3.3
-</pre></div>
-<div class="highlight"><pre><span></span>!jupyter-labextension list
-
-JupyterLab v1.2.3
-Known labextensions:
-   app dir: /usr/local/share/jupyter/lab
-        @aquirdturtle/collapsible_headings v0.5.0  enabled  OK
-        @jupyter-widgets/jupyterlab-manager v1.1.0  enabled  OK
-        @jupyterlab/git v0.8.2  enabled  OK
-        @jupyterlab/github v1.0.1  enabled  OK
-        jupyterlab-flake8 v0.4.0  enabled  OK
-
-Uninstalled core extensions:
-    @jupyterlab/github
-    jupyterlab-flake8
-</pre></div>
+<p>The following magics will reload all modules before executing a new line and help make sure you follow PEP8 code style.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!jupyter --version</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!jupyter-labextension list</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Notebook-Configs">Notebook Configs<a class="anchor-link" href="#Notebook-Configs">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># AUTO GENERATED CELL FOR NOTEBOOK SETUP</span>
-
-<span class="c1"># NOTEBOOK WIDE MAGICS</span>
-
-<span class="c1"># Reload all modules before executing a new line</span>
-<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
 <span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
 
-<span class="c1"># Abide by PEP8 code style</span>
 <span class="o">%</span><span class="n">load_ext</span> <span class="n">pycodestyle_magic</span>
 <span class="o">%</span><span class="n">pycodestyle_on</span>
-
-<span class="c1"># LIBRARY SPECIFIC MAGICS - UNCOMMENT AS NEEDED</span>
-
-<span class="c1"># Plot all matplotlib plots in output cell and save on close</span>
-<span class="c1"># %matplotlib inline</span>
 </pre></div>
 
     </div>
@@ -147,14 +67,7 @@ Uninstalled core extensions:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conditional-Statements:-if,-elif,-else">Conditional Statements: <code>if</code>, <code>elif</code>, <code>else</code><a class="anchor-link" href="#Conditional-Statements:-if,-elif,-else">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Syntax for if statements</p>
+<h2 id="Conditional-Statements:-if,-elif,-else">Conditional Statements: <code>if</code>, <code>elif</code>, <code>else</code><a class="anchor-link" href="#Conditional-Statements:-if,-elif,-else">&#182;</a></h2><p>If statements are used to do specific things based on conditions. Their general syntax is below</p>
 <div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">boolean_expression</span><span class="p">:</span>
     <span class="c1"># do something</span>
 <span class="k">elif</span> <span class="n">boolean_expression</span><span class="p">:</span>
@@ -166,9 +79,17 @@ Uninstalled core extensions:
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following statements show an <code>if</code> followed by something that evaluates to a boolean expression (<code>True</code> or <code>False</code>).</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">):</span>
@@ -200,7 +121,7 @@ Uninstalled core extensions:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
@@ -230,9 +151,59 @@ Uninstalled core extensions:
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We could always verify the output of the boolean expression like this</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This statement uses <code>if</code>, <code>elif</code> and <code>else</code>.</p>
+<p><em>Try running the cell. It will prompt you for input, then print a statement based on what you enter. Try to follow the logic and guess that it will print before looking at the result.</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Please enter an integer: &quot;</span><span class="p">))</span>
@@ -270,7 +241,7 @@ Uninstalled core extensions:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Zero
+<pre>More
 </pre>
 </div>
 </div>
@@ -282,43 +253,22 @@ Uninstalled core extensions:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Python3.8 introduced "the walrus operator" (<code>:=</code>) shown below to assign values to variables as part of a larger expression.</p>
+<p>Python 3.8 introduced "the walrus operator" (<code>:=</code>) shown below to assign values to variables as part of a larger expression.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">:</span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List is too long (</span><span class="si">{n}</span><span class="s2"> elements, expected &lt;= 10)&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># This will not work unless you are running Python 3.8+</span>
+<span class="c1"># if (n := len(a)) &gt; 10:</span>
+<span class="c1">#     print(f&quot;List is too long ({n} elements, expected &lt;= 10)&quot;)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-cyan-fg">  File </span><span class="ansi-green-fg">&#34;&lt;ipython-input-1-60741718a228&gt;&#34;</span><span class="ansi-cyan-fg">, line </span><span class="ansi-green-fg">1</span>
-<span class="ansi-red-fg">    if (n := len(a)) &gt; 10:</span>
-          ^
-<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -326,48 +276,7 @@ Uninstalled core extensions:
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>Note: If the cell above doesn't work check to make sure you are running Python 3.8 or greater</em></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>3.7.5 (default, Nov  1 2019, 13:00:01) 
-[Clang 11.0.0 (clang-1100.0.33.8)]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Loops:-for,-while">Loops: <code>for</code>, <code>while</code><a class="anchor-link" href="#Loops:-for,-while">&#182;</a></h2><p>Loops are used to iterate over the items of any sequence.</p>
+<h2 id="Loops:-for,-while">Loops: <code>for</code>, <code>while</code><a class="anchor-link" href="#Loops:-for,-while">&#182;</a></h2><p>Loops are used to iterate over the items of any sequence. Their syntax is below.</p>
 <div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
     <span class="c1"># do something</span>
 </pre></div>
@@ -380,10 +289,10 @@ Uninstalled core extensions:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;eat&#39;</span><span class="p">,</span> <span class="s1">&#39;pray&#39;</span><span class="p">,</span> <span class="s1">&#39;love&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;eat&#39;</span><span class="p">,</span> <span class="s1">&#39;dance&#39;</span><span class="p">,</span> <span class="s1">&#39;love&#39;</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">my_list</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
@@ -404,7 +313,7 @@ Uninstalled core extensions:
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>eat 3
-pray 4
+dance 5
 love 4
 </pre>
 </div>
@@ -416,7 +325,7 @@ love 4
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
@@ -454,7 +363,8 @@ love 4
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Additional-loop-clauses:-break,-continue,-else">Additional loop clauses: <code>break</code>, <code>continue</code>, <code>else</code><a class="anchor-link" href="#Additional-loop-clauses:-break,-continue,-else">&#182;</a></h3>
+<h3 id="Additional-loop-clauses:-break,-continue,-else">Additional loop clauses: <code>break</code>, <code>continue</code>, <code>else</code><a class="anchor-link" href="#Additional-loop-clauses:-break,-continue,-else">&#182;</a></h3><p>We can also do a few more things with loops like test conditions within them, break out of them, and more. Let's look at a few below.</p>
+
 </div>
 </div>
 </div>
@@ -468,7 +378,7 @@ love 4
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
@@ -514,7 +424,7 @@ stopping at a = 1
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
@@ -560,7 +470,7 @@ Found an odd number 5
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
@@ -599,6 +509,68 @@ Found an odd number 5
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Troubleshooting-Tips">Troubleshooting Tips<a class="anchor-link" href="#Troubleshooting-Tips">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you run into issues running any of the code in this notebook, check your version of Python and Jupyter against mine below</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+</pre></div>
+
+<pre><code>3.7.6 (default, Dec 31 2019, 17:12:14) 
+[Clang 11.0.0 (clang-1100.0.33.16)]</code></pre>
+<div class="highlight"><pre><span></span><span class="err">!</span><span class="n">jupyter</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+
+<pre><code>jupyter core     : 4.6.1
+jupyter-notebook : 6.0.2
+qtconsole        : not installed
+ipython          : 7.9.0
+ipykernel        : 5.1.3
+jupyter client   : 5.3.4
+jupyter lab      : 1.2.3
+nbconvert        : 5.6.1
+ipywidgets       : not installed
+nbformat         : 4.4.0
+traitlets        : 4.3.3</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import sys</span>
+<span class="c1"># print(sys.version)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># !jupyter --version</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
