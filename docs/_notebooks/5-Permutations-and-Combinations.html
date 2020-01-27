@@ -5,11 +5,11 @@ permalink: /permutations-and-combinations-in-python/
 topics: ['Permutations and Combinations']
 ---
 {{site.nb_info}}
-<br><!-- NAV --><p style="font-style:italic;font-size:smaller;">&lt; <a href="{{ "classes-in-python" | relative_url }}">Classes in Python</a> | <a href="{{ "/" | relative_url }}">Contents</a> | <a href="{{ "logging-errors-and-exceptions-in-python" | relative_url }}">Logging Errors and Exceptions in Python</a> &gt;</p>
+<br><br><!-- NAV --><p style="font-style:italic;font-size:smaller;">&lt; <a href="{{ "classes-in-python" | relative_url }}">Classes in Python</a> | <a href="{{ "/" | relative_url }}">Contents</a> | <a href="{{ "logging-errors-and-exceptions-in-python" | relative_url }}">Logging Errors and Exceptions in Python</a> &gt;</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Permutations-and-Combinations-in-Python">Permutations and Combinations in Python<a class="anchor-link" href="#Permutations-and-Combinations-in-Python">&#182;</a></h1><p><strong>Purpose:</strong> The purpose of this workbook is to help you get comfortable with permutations and combinations in Python.</p>
+<h1 id="Permutations-and-Combinations-in-Python">Permutations and Combinations in Python<a class="anchor-link" href="#Permutations-and-Combinations-in-Python">&#182;</a></h1><p><strong>Purpose:</strong> To help you get comfortable with the topics outlined below</p>
 <p><strong>Recomended Usage</strong></p>
 <ul>
 <li>Run each of the cells (Shift+Enter) and edit them as necessary to solidify your understanding</li>
@@ -30,51 +30,27 @@ topics: ['Permutations and Combinations']
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following magics will reload all modules before executing a new line and help make sure you follow PEP8 code style.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># AUTO GENERATED CELL FOR NOTEBOOK SETUP</span>
-
-<span class="c1"># NOTEBOOK WIDE MAGICS</span>
-
-<span class="c1"># Reload all modules before executing a new line</span>
-<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
 <span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
 
-<span class="c1"># Abide by PEP8 code style</span>
 <span class="o">%</span><span class="n">load_ext</span> <span class="n">pycodestyle_magic</span>
 <span class="o">%</span><span class="n">pycodestyle_on</span>
-
-<span class="c1"># LIBRARY SPECIFIC MAGICS - UNCOMMENT AS NEEDED</span>
-
-<span class="c1"># Plot all matplotlib plots in output cell and save on close</span>
-<span class="c1"># %matplotlib inline</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>The autoreload extension is already loaded. To reload it, use:
-  %reload_ext autoreload
-The pycodestyle_magic extension is already loaded. To reload it, use:
-  %reload_ext pycodestyle_magic
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -281,7 +257,69 @@ The pycodestyle_magic extension is already loaded. To reload it, use:
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Troubleshooting-Tips">Troubleshooting Tips<a class="anchor-link" href="#Troubleshooting-Tips">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you run into issues running any of the code in this notebook, check your version of Python and Jupyter against mine below</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+</pre></div>
+
+<pre><code>3.7.6 (default, Dec 31 2019, 17:12:14) 
+[Clang 11.0.0 (clang-1100.0.33.16)]</code></pre>
+<div class="highlight"><pre><span></span>!jupyter --version
+</pre></div>
+
+<pre><code>jupyter core     : 4.6.1
+jupyter-notebook : 6.0.2
+qtconsole        : not installed
+ipython          : 7.9.0
+ipykernel        : 5.1.3
+jupyter client   : 5.3.4
+jupyter lab      : 1.2.3
+nbconvert        : 5.6.1
+ipywidgets       : not installed
+nbformat         : 4.4.0
+traitlets        : 4.3.3</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import sys</span>
+<span class="c1"># print(sys.version)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># !jupyter --version</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
  
 
 
-<br><!-- NAV --><p style="font-style:italic;font-size:smaller;">&lt; <a href="{{ "classes-in-python" | relative_url }}">Classes in Python</a> | <a href="{{ "/" | relative_url }}">Contents</a> | <a href="{{ "logging-errors-and-exceptions-in-python" | relative_url }}">Logging Errors and Exceptions in Python</a> &gt;</p>
+<br><br><!-- NAV --><p style="font-style:italic;font-size:smaller;">&lt; <a href="{{ "classes-in-python" | relative_url }}">Classes in Python</a> | <a href="{{ "/" | relative_url }}">Contents</a> | <a href="{{ "logging-errors-and-exceptions-in-python" | relative_url }}">Logging Errors and Exceptions in Python</a> &gt;</p>
