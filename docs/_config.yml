@@ -30,7 +30,7 @@ nb_info: >-
   <a href="https://github.com/nancynobody/python3_fluency">on GitHub</a>. 
   If you want to launch the notebooks interactively click on the binder stamp below 
   </sup></sub>
-  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nancynobody/python3_fluency/tree/master/notebooks/master)
+  <a href="https://mybinder.org/v2/gh/nancynobody/python3_fluency/tree/master/notebooks/master"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a>
 
 # Customize navigation links
 header_pages:
