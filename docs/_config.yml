@@ -44,7 +44,7 @@ plugins:
  - jekyll-feed
 
 # Google Analytics (will only appear in production, i.e., JEKYLL_ENV=production)
-# To enable, add the following lines to your Jekyll site
+# To enable, add the following lines
 google_analytics: UA-65929619-3
 
 # Social Networks
